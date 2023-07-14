@@ -1,0 +1,14 @@
+{% extends 'Store/base.html' %}
+
+{% block title %}INDEX{% endblock %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+<form action="{% url 'index' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Title of the email" required><br><br>
+    <input type="email" name="email" placeholder="Email Address" required><br><br>
+    <textarea name="message" placeholder="Message To Be Delivered" cols="30" rows="10" required></textarea><br><br>
+    <button class="btn btn-primary mt-2" type="submit">Send</button>
+</form>
+</div>
+{% endblock %}

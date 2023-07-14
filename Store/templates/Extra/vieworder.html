@@ -1,0 +1,80 @@
+{% extends 'Store/base.html' %}
+
+
+{% block content %}
+    <div class="py-3 bg-primary">
+        <div class="container">
+            <a class="text-white" href="{% url 'index' %}">Home - </a>
+            <a class="text-white" href="{% url 'orders' %}">Order Details</a>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h3 class="mb-0">Orders
+                            <a href="{% url 'orders' %}" class="btn btn-primary float-end text-white">Back</a>
+                        </h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Order Details</h4><hr>
+                                <label class="mt-2">First Name</label>
+                                <div class="border p-2">{{ order.fname }}</div>
+                                <label class="mt-2">Last Name</label>
+                                <div class="border p-2">{{ order.lname }}</div>
+                                <label class="mt-2">Email</label>
+                                <div class="border p-2">{{ order.email }}</div>
+                                <label class="mt-2">Phone</label>
+                                <div class="border p-2">{{ order.phone }}</div>
+                                <label class="mt-2">Address</label>
+                                    <div class="border p-2">
+                                        {{ order.address }}
+                                        {{ order.city }}
+                                        {{ order.state }}
+                                        {{ order.country }}
+                                    </div>
+                                <label class="mt-2">Pin code</label>
+                                <div class="border p-2">{{ order.pincode }}</div>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Image</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in orderitems %}
+                                            <tr>
+                                                <td>{{ item.product.name }}</td>
+                                                <td>{{ item.quantity }}</td>
+                                                <td>{{ item.price }}</td>
+                                                <td>                                                    
+                                                    <img src="{{ item.product.product_image.url }}" height="50px" width="50px" alt="Product Image">
+                                                </td>                                                     
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <h4>Tottaly : <span class="float-end">{{ order.total_price }}</span> </h4>
+                                <h6 class="border p-3">Order Status : <span class="float-end">{{ order.status }} </span></h6>
+                                <h6 class="border p-3">Payment Mode : <span class="float-end">{{ order.payment_mode }}</span></h6>
+                                <h6 class="border p-3">Tracking Number : <span class="float-end"> {{ order.traking_no }} </span></h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
